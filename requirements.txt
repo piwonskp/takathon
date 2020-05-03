@@ -1,0 +1,4 @@
+click==7.1.2
+click-log==0.3.2
+lark-parser==0.8.5
+pre-commit==2.3.0

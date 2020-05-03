@@ -1,0 +1,1 @@
+from takathon.interpreter.ast_interpreter.interpreter import interpret
