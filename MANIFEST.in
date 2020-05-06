@@ -1,0 +1,1 @@
+include src/takathon/interpreter/parser/grammar/*.lark
