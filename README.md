@@ -1,6 +1,8 @@
 # Takathon
 Takathon is a language focused on QA and unit testing.
 
+### [Documentation](https://takathon.readthedocs.io)
+
 ## Design Goals
 The main goal is similiar to [Specification by example](https://en.wikipedia.org/wiki/Specification_by_example) goals, namely to merge tests, documentation and type system into one thing called specification. Specification describes a chunk of code (e.g. function).
 
@@ -12,9 +14,14 @@ This approach has plenty of benefits:
 * Testing in real time
 * Native TDD support
 
+## Installation
+```bash
+pip install -e git://github.com/piwonskp/takathon.git@0.1.0#egg=takathon
+```
+
 ## Usage
 Testing factorial function for several arguments and expected exception:
-```
+```python
 def factorial(n):
     """
     spec:
