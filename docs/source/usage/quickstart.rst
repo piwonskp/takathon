@@ -6,7 +6,7 @@ Structure
 
 Basic specification structure:
 
-.. code-block::
+.. code-block:: none
 
    spec:
        domain <arguments>:
