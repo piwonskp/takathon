@@ -10,12 +10,10 @@ def factorial(n):
             title: Should return 1 on boundary
             description: Function should return 0 when called with 0
             results 1
-        domain 1:
-            results 1
+        domain 1: results 1
         domain 3: results 6
         domain 4: results 24
-        domain 5:
-            results 120
+        domain 5: results 120
     """
     if n < 0:
         raise ValueError("factorial() not defined for negative values")
