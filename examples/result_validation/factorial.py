@@ -4,7 +4,9 @@ def factorial(n):
         title: Factorial
         domain -1:
             title: Should be incalculable for negative values
-            description: Function raises proper exception when called with negative value
+            description:
+                Function raises proper exception
+                when called with negative value
             throws ValueError('factorial() not defined for negative values')
         domain 0:
             title: Should return 1 on boundary

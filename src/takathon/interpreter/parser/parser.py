@@ -3,16 +3,10 @@ import os
 from lark import lark
 from lark.indenter import Indenter
 
-from takathon.interpreter.parser.inline_python import (
-    MergePythonTokens,
-    flatten_python_subtree,
-)
 from takathon.interpreter.parser.to_ast import ToAST
 
+
 GRAMMAR_PATH = os.path.join(os.path.dirname(__file__), "grammar", "takathon.lark")
-
-
-lark.load_grammar = flatten_python_subtree
 
 
 class GrammarIndenter(Indenter):
@@ -29,11 +23,11 @@ def parse(spec):
         open(GRAMMAR_PATH),
         parser="lalr",
         postlex=GrammarIndenter(),
-        transformer=MergePythonTokens(),
         maybe_placeholders=True,
+        propagate_positions=True,
     )
     return parser.parse(spec)
 
 
 def make_ast(module_name, spec):
-    return ToAST(module_name, visit_tokens=True).transform(parse(spec))
+    return ToAST(module_name, spec, visit_tokens=True).transform(parse(spec))

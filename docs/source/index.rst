@@ -17,7 +17,7 @@ Install
 
 .. code-block:: bash
 
-   pip install -e git://github.com/piwonskp/takathon.git@0.1.0#egg=takathon
+   pip install https://github.com/piwonskp/takathon/archive/0.1.1.tar.gz
 
 .. toctree::
    :maxdepth: 2
