@@ -22,7 +22,7 @@ copyright = "2020, Piotr Piwoński"
 author = "Piotr Piwoński"
 
 # The full version, including alpha/beta/rc tags
-release = "0.1.1"
+release = "0.2.0"
 
 
 # -- General configuration ---------------------------------------------------
@@ -54,3 +54,8 @@ html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
 
 master_doc = "index"
+
+
+rst_epilog = f"""
+.. |release| replace:: {release}
+"""

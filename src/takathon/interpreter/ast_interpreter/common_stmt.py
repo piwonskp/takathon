@@ -1,13 +1,32 @@
+import inspect
 import sys
+from dataclasses import dataclass, field
+from types import FunctionType, ModuleType
 from unittest.mock import patch
 
 from takathon.interpreter.ast_interpreter.exceptions import (
     WrongMockPathException,
     construct_user_code_exc,
 )
+from takathon.result import TestResults
 
 
+@dataclass
+class TestedFunction:
+    function: FunctionType
+    results: TestResults = field(default_factory=TestResults, init=False)
+
+    @property
+    def function_id(self):
+        return f"{inspect.getfile(self.function)}#{self.function.__name__}"
+
+
+@dataclass
 class CommonInterpreter:
+    module: ModuleType
+    scope: dict
+    target: TestedFunction
+
     def stmt(self, node):
         if node.data == "mock_stmt":
             self.mock(*node.children)
@@ -32,7 +51,7 @@ class CommonInterpreter:
         return f"<takathon {self.target.function_id}>"
 
     def unsafe_eval(self, expr):
-        return eval(compile(expr, self.get_test_id(), "eval"), *self.scope())
+        return eval(compile(expr, self.get_test_id(), "eval"), *self.namespaces())
 
     def eval(self, expr, lineno):
         try:
@@ -43,7 +62,10 @@ class CommonInterpreter:
             )
 
     def unsafe_exec(self, stmt):
-        return exec(compile(stmt, self.get_test_id(), "exec"), *self.scope())
+        return exec(compile(stmt, self.get_test_id(), "exec"), *self.namespaces())
+
+    def namespaces(self):
+        return self.module.__dict__, self.scope
 
     def exec(self, stmt, lineno):
         try:

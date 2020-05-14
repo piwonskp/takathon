@@ -1,18 +1,19 @@
-import inspect
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from traceback import TracebackException
-from types import FunctionType, ModuleType
 
 from lark import Lark, Token
 
-from takathon.interpreter.ast_interpreter.common_stmt import CommonInterpreter
+from takathon.interpreter.ast_interpreter.common_stmt import (
+    CommonInterpreter,
+    TestedFunction,
+)
 from takathon.interpreter.ast_interpreter.exceptions import (
     UserException,
     construct_user_code_exc,
 )
 from takathon.output import fail, fail_style, success
-from takathon.result import TestResults, test_failed, test_passed
+from takathon.result import test_failed, test_passed
 
 INCORRECT_RESULT = "\tExpected {} got {}".format
 REJECTED_RESULT = "\tFunction {} rejected result {}".format
@@ -21,29 +22,10 @@ MISSING_EXCEPTION = "\tExpected exception {}. No exception has been raised".form
 
 
 @dataclass
-class TestedFunction:
-    function: FunctionType
-    results: TestResults = field(default_factory=TestResults, init=False)
-
-    @property
-    def function_id(self):
-        return f"{inspect.getfile(self.function)}#{self.function.__name__}"
-
-
-@dataclass
 class TestCaseInterpreter(CommonInterpreter):
-    module: ModuleType
-    target: TestedFunction
     arguments: Token
     title: Token
     description: Token
-
-    def __post_init__(self):
-        self.local_scope = {}
-
-    @property
-    def function_id(self):
-        return self.target.function_id
 
     def unsafe_interpret(self, children):
         for node in children:
@@ -120,9 +102,6 @@ class TestCaseInterpreter(CommonInterpreter):
         else:
             self.failed()
             fail(MISSING_EXCEPTION(expected_exception))
-
-    def scope(self):
-        return self.module.__dict__, self.local_scope
 
     def failed_info(self):
         if self.title:

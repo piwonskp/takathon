@@ -8,15 +8,15 @@ The main goal is similiar to [Specification by example](https://en.wikipedia.org
 
 This approach has plenty of benefits:
 * Declarative and readable tests
-* Documentation and usage examples generated directly from specification
 * Helpful error messages
+* Documentation and usage examples generated directly from specification
 * Easier debugging
 * Testing in real time
-* Native TDD support
+* Native TDD/BDD support
 
 ## Installation
 ```bash
-pip install https://github.com/piwonskp/takathon/archive/0.1.1.tar.gz
+pip install https://github.com/piwonskp/takathon/archive/0.2.0.tar.gz
 ```
 
 ## Usage

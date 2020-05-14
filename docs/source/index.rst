@@ -15,9 +15,9 @@ Features
 Install
 -------
 
-.. code-block:: bash
+.. parsed-literal::
 
-   pip install https://github.com/piwonskp/takathon/archive/0.1.1.tar.gz
+   pip install \https://github.com/piwonskp/takathon/archive/|release|.tar.gz
 
 .. toctree::
    :maxdepth: 2

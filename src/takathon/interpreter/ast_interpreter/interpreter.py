@@ -1,20 +1,21 @@
+import copy
 import logging
 from dataclasses import InitVar, dataclass, field
-from types import FunctionType, ModuleType
+from types import FunctionType
 
 from lark import Token
 
 from takathon.interpreter.ast_interpreter.builtins import BUILTINS
-from takathon.interpreter.ast_interpreter.common_stmt import CommonInterpreter
+from takathon.interpreter.ast_interpreter.common_stmt import (
+    CommonInterpreter,
+    TestedFunction,
+)
 from takathon.interpreter.ast_interpreter.count_tests import count_tests
 from takathon.interpreter.ast_interpreter.exceptions import (
     UserException,
     WrongMockPathException,
 )
-from takathon.interpreter.ast_interpreter.test_case import (
-    TestCaseInterpreter,
-    TestedFunction,
-)
+from takathon.interpreter.ast_interpreter.test_case import TestCaseInterpreter
 from takathon.output import clear_line
 from takathon.result import tests_failed
 
@@ -26,7 +27,7 @@ def print_results(function_id, results):
 
 
 def interpret(module, function, title, description, *ast):
-    interpreter = Interpreter(module, function, title, description)
+    interpreter = Interpreter(module, TestedFunction(function), title, description)
     interpreter.interpret(ast)
 
     print_results(interpreter.target.function_id, interpreter.target.results)
@@ -34,16 +35,11 @@ def interpret(module, function, title, description, *ast):
 
 @dataclass
 class Interpreter(CommonInterpreter):
-    module: ModuleType
-    function: InitVar[FunctionType]
-    target: TestedFunction = field(init=False)
+    scope: dict = field(default_factory=lambda: copy.copy(BUILTINS), init=False)
     title: Token
     description: Token
 
-    def __post_init__(self, function):
-        self.module.__dict__.update(BUILTINS)
-        self.target = TestedFunction(function)
-
+    def __post_init__(self):
         self.test_info()
 
     def test_info(self):
@@ -79,8 +75,10 @@ class Interpreter(CommonInterpreter):
 
     def test_case(self, arguments, title, description, *subtree):
         return TestCaseInterpreter(
-            self.module, self.target, arguments, title, description
+            self.module,
+            copy.deepcopy(self.scope),
+            self.target,
+            arguments,
+            title,
+            description,
         ).interpret(subtree)
-
-    def scope(self):
-        return (self.module.__dict__,)
