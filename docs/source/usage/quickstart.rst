@@ -9,7 +9,9 @@ Basic specification structure:
 .. code-block:: none
 
    spec:
+       [Any operation here applies to all test cases below]
        domain <arguments>:
+           [Operations declared here apply to this particular test case]
            results <expected result>
 
 Let's see what all of this means:

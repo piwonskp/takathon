@@ -6,7 +6,7 @@ A language focused on QA and unit testing.
 Features
 --------
 
-* Standarized test structure
+* Standardized test structure
 * Dedicated Python like syntax
 * Test domains
 * Compatibility with Python
