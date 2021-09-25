@@ -1,4 +1,6 @@
-start: "spec:" _NEWLINE _INDENT _docs (_stmt | domain_stmt)* _DEDENT
+start: "spec:" _NEWLINE _INDENT _docs _top_stmt* _DEDENT
+
+_top_stmt: _stmt | domain_stmt
 
 domain_stmt: ("domain" arguments ":" | BLANK_DOMAIN_STMT) (inline_test | multiline_test)
 BLANK_DOMAIN_STMT: /domain\s*:/
@@ -26,15 +28,7 @@ multiline_text: _NEWLINE* _INDENT _one_line_text+ _DEDENT
 _one_line_text: RAW_TEXT _NEWLINE*
 RAW_TEXT.0: /.+/
 
-%import .python.arguments
-%import .python.dotted_name
-%import .python.import_stmt
-%import .python.test
-%import .python.testlist
-%import .python.COMMENT
-%import .python._INDENT
-%import .python._DEDENT
-%import .python._NEWLINE
+%import .python (arguments, dotted_name, import_stmt, test, testlist, COMMENT, _INDENT, _DEDENT, _NEWLINE)
 %import common.WS_INLINE
 %ignore WS_INLINE
 %ignore COMMENT
