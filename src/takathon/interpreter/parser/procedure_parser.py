@@ -1,8 +1,10 @@
-from dataclasses import dataclass
+import os
 
-from lark import Lark, Token, Transformer, Tree, v_args
-from lark.reconstruct import Reconstructor
+from lark import Token, Transformer, Tree, v_args
 
+from takathon.interpreter.parser.parser import make_parser
+
+GRAMMAR_PATH = os.path.join(os.path.dirname(__file__), "grammar", "procedure.lark")
 is_mock = lambda node: type(node) == Tree and node.data == "mock_stmt"
 
 
@@ -61,9 +63,6 @@ class ToAST(Transformer):
         return transform_mock(tree.children)
 
     def get_original_text(self, tree):
-        # TODO: Once the issue is resolved delete the line setting pos_in_stream
-        # Reference: https://github.com/lark-parser/lark/issues/587
-        tree.meta.pos_in_stream = tree.meta.start_pos
         original = self.spec[tree.meta.start_pos : tree.meta.end_pos]
         return Token.new_borrow_pos("PYTHON_CODE", original, tree.meta)
 
@@ -76,3 +75,12 @@ class ToAST(Transformer):
     import_stmt = set_children_as_original_text
     python_expr = get_original_text
     testlist = get_original_text
+
+
+def parse(spec):
+    parser = make_parser(GRAMMAR_PATH)
+    return parser.parse(spec)
+
+
+def make_procedure_ast(module_name, spec):
+    return ToAST(module_name, spec, visit_tokens=True).transform(parse(spec))

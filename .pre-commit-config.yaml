@@ -1,13 +1,11 @@
 repos:
-# TODO: isort and black are incompatible in formatting long imports. Uncomment once it is fixed.
-# Reference: https://github.com/timothycrosley/isort/issues/694#issuecomment-620513533
-# -   repo: https://github.com/timothycrosley/isort
-#     rev: 4.3.21-2
-#     hooks:
-#     - id: isort
-#       language_version: python3.8
+-   repo: https://github.com/timothycrosley/isort
+    rev: 5.9.3
+    hooks:
+    - id: isort
+      language_version: python3.8
 -   repo: https://github.com/psf/black
-    rev: stable
+    rev: 21.9b0
     hooks:
     - id: black
       language_version: python3.8

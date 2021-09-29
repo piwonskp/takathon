@@ -17,7 +17,7 @@ class TestedFunction:
     results: TestResults = field(default_factory=TestResults, init=False)
 
     @property
-    def function_id(self):
+    def id(self):
         return f"{inspect.getfile(self.function)}#{self.function.__name__}"
 
 
@@ -48,7 +48,7 @@ class CommonInterpreter:
         self.exec(stmt, stmt.line)
 
     def get_test_id(self):
-        return f"<takathon {self.target.function_id}>"
+        return f"<takathon {self.target.id}>"
 
     def unsafe_eval(self, expr):
         return eval(compile(expr, self.get_test_id(), "eval"), *self.namespaces())

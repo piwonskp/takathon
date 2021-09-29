@@ -1,40 +1,43 @@
 import copy
 import logging
-from dataclasses import InitVar, dataclass, field
-from types import FunctionType
+from dataclasses import dataclass, field
 
 from lark import Token
 
-from takathon.interpreter.ast_interpreter.builtins import BUILTINS
-from takathon.interpreter.ast_interpreter.common_stmt import (
-    CommonInterpreter,
-    TestedFunction,
-)
-from takathon.interpreter.ast_interpreter.count_tests import count_tests
 from takathon.interpreter.ast_interpreter.exceptions import (
     UserException,
     WrongMockPathException,
 )
-from takathon.interpreter.ast_interpreter.test_case import TestCaseInterpreter
+from takathon.interpreter.ast_interpreter.procedure_interpreter.builtins import BUILTINS
+from takathon.interpreter.ast_interpreter.procedure_interpreter.common_stmt import (
+    CommonInterpreter,
+    TestedFunction,
+)
+from takathon.interpreter.ast_interpreter.procedure_interpreter.count_tests import (
+    count_tests,
+)
+from takathon.interpreter.ast_interpreter.procedure_interpreter.test_case import (
+    TestCaseInterpreter,
+)
 from takathon.output import clear_line
 from takathon.result import tests_failed
 
 
-def print_results(function_id, results):
-    logging.info(
-        f"{function_id}: {results.passed} tests passed, {results.failed} failed"
-    )
+def print_results(id, results):
+    logging.info(f"{id}: {results.passed} tests passed, {results.failed} failed")
 
 
 def interpret(module, function, title, description, *ast):
-    interpreter = Interpreter(module, TestedFunction(function), title, description)
+    interpreter = ProcedureInterpreter(
+        module, TestedFunction(function), title, description
+    )
     interpreter.interpret(ast)
 
-    print_results(interpreter.target.function_id, interpreter.target.results)
+    print_results(interpreter.target.id, interpreter.target.results)
 
 
 @dataclass
-class Interpreter(CommonInterpreter):
+class ProcedureInterpreter(CommonInterpreter):
     scope: dict = field(default_factory=lambda: copy.copy(BUILTINS), init=False)
     title: Token
     description: Token
@@ -47,7 +50,7 @@ class Interpreter(CommonInterpreter):
         if self.title:
             logging.info(self.title)
         else:
-            logging.info(f"{self.target.function_id}:")
+            logging.info(f"{self.target.id}:")
 
     def unsafe_interpret(self, ast):
         for node in ast:

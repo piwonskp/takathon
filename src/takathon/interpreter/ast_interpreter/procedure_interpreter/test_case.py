@@ -1,18 +1,16 @@
 import logging
 from dataclasses import dataclass
-from traceback import TracebackException
 
-from lark import Lark, Token
+from lark import Token
 
-from takathon.interpreter.ast_interpreter.common_stmt import (
-    CommonInterpreter,
-    TestedFunction,
-)
 from takathon.interpreter.ast_interpreter.exceptions import (
     UserException,
     construct_user_code_exc,
 )
-from takathon.output import fail, fail_style, success
+from takathon.interpreter.ast_interpreter.procedure_interpreter.common_stmt import (
+    CommonInterpreter,
+)
+from takathon.output import fail
 from takathon.result import test_failed, test_passed
 
 INCORRECT_RESULT = "\tExpected {} got {}".format

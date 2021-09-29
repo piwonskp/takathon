@@ -7,7 +7,8 @@ BLANK_DOMAIN_STMT: /domain\s*:/
 inline_test: _fun_call
 multiline_test: _NEWLINE _INDENT _docs _stmt* _fun_call _DEDENT
 
-_stmt: (mock_stmt | import_stmt) _NEWLINE
+_stmt: _common_stmt _NEWLINE
+_common_stmt: mock_stmt | import_stmt
 
 mock_stmt: "mock" _mock_path "as" python_expr
 _mock_path: mock_current_module | mock_path_absolute

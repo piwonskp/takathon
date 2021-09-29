@@ -14,7 +14,7 @@ from takathon.interpreter.ast_interpreter.exceptions.user_exception import (
 def construct_user_code_exc(
     function, lineno, executed_code, exc_type, exc_value, exc_traceback
 ):
-    """ Not generic enough to make it a real class constructor """
+    """Not generic enough to make it a real class constructor"""
     exc_traceback = exc_traceback.tb_next.tb_next
 
     exc = TracebackException(exc_type, exc_value, exc_traceback)

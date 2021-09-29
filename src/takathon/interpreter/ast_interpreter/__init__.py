@@ -1,1 +1,1 @@
-from takathon.interpreter.ast_interpreter.interpreter import interpret
+from takathon.interpreter.ast_interpreter.procedure_interpreter import interpret

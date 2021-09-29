@@ -1,12 +1,5 @@
-import os
-
 from lark import lark
 from lark.indenter import Indenter
-
-from takathon.interpreter.parser.to_ast import ToAST
-
-
-GRAMMAR_PATH = os.path.join(os.path.dirname(__file__), "grammar", "takathon.lark")
 
 
 class GrammarIndenter(Indenter):
@@ -18,16 +11,11 @@ class GrammarIndenter(Indenter):
     tab_len = 8
 
 
-def parse(spec):
-    parser = lark.Lark(
-        open(GRAMMAR_PATH),
+def make_parser(grammar_path):
+    return lark.Lark(
+        open(grammar_path),
         parser="lalr",
         postlex=GrammarIndenter(),
         maybe_placeholders=True,
         propagate_positions=True,
     )
-    return parser.parse(spec)
-
-
-def make_ast(module_name, spec):
-    return ToAST(module_name, spec, visit_tokens=True).transform(parse(spec))

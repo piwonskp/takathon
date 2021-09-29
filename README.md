@@ -49,6 +49,7 @@ def factorial(n):
 Other examples are located in [examples/](examples) directory. To test a specific file you can use `takathon <file-name>` command inside docker container
 
 ## Development
+Install git hooks: `python3 -m venv venv && . venv/bin/activate && pip install -r requirements.txt && pre-commit install`.
 Preferred way is to use docker for development. To run the tool install docker-compose and type `docker-compose run --rm app`.
 
 ### Testing

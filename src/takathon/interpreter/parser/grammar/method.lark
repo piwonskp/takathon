@@ -1,0 +1,8 @@
+%import .procedure (start, arguments, _common_stmt, _NEWLINE, _INDENT, _DEDENT, COMMENT, WS_INLINE)
+
+%extend _common_stmt: new
+
+new: "new" arguments?
+
+%ignore WS_INLINE
+%ignore COMMENT
