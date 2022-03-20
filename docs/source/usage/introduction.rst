@@ -1,12 +1,13 @@
 Introduction
 ************
 
-Basically any test can be separated into two phases:
+A test can be separated into three phases:
 
-* **Test preparation** - configuration, environment setup, mocking, creating objects, preparing arguments
-* **Actual test** - a simple assertion, often one-liner
+* **Test preparation** - configuration, environment setup, mocking, creating objects, preparing arguments etc.
+* **Invocation** - execution of the code under test
+* **Assertion** - a single assertion or series of assertions, often one-liner
 
-I believe it's safe to say that usually test preparation is way more complicated than actual test. Due to this fact the core point of test is often foggy.
+Most of the time test preparation is way more complicated than other phases. Due to this fact the core point of test is often foggy.
 
 Declarative tests
 =================
