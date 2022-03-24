@@ -6,11 +6,11 @@ class SingleMethodWithoutDocs:
     def add(self, c):
         """
         spec:
-            # TEST COMMMENT
+            # Test creation of object
             new 10, 20
             domain 2: results 32
+            # Make sure object is replaced with a new one
             new -6, 2
-            # USELESS COMMENT
             domain 4: results 0
         """
         return self.a + self.b + c
