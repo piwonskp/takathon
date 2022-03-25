@@ -18,11 +18,11 @@
 # -- Project information -----------------------------------------------------
 
 project = "takathon"
-copyright = "2020, Piotr Piwoński"
+copyright = "2022, Piotr Piwoński"
 author = "Piotr Piwoński"
 
 # The full version, including alpha/beta/rc tags
-release = "0.2.0"
+release = "0.3.0"
 
 
 # -- General configuration ---------------------------------------------------

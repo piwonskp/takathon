@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="takathon",
-    version="0.2.0",
+    version="0.3.0",
     author="Piotr Piwoński",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
