@@ -26,7 +26,7 @@ Long description
 
 When used on specification level `description` is a documentation for object itself.
 
-`description` on test case level helps understand reasons of particular test and it's quirks.
+`description` on test case level helps understand reasons of particular test and its quirks.
 
 Examples
 ========

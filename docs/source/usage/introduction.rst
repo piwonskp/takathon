@@ -7,12 +7,12 @@ A test can be separated into three phases:
 * **Invocation** - execution of the code under test
 * **Assertion** - a single assertion or series of assertions, often one-liner
 
-Most of the time test preparation is way more complicated than other phases. Due to this fact the core point of test is often foggy.
+Usually test preparation is the most complicated phase. Due to this fact the core point of test is often foggy.
 
 Declarative tests
 =================
 
-Pytest_ does a great job in managing separation between test preparations(fixtures) and actual tests. But there is more to it. Tests are kind of examples which are always up to date - actually that's what doctest_ do.
+Pytest_ does a great job in managing separation between test preparation(fixtures) and actual tests. But there is more to it. Tests are kind of examples which are always up to date - actually that's what doctest_ do.
 
 .. _Pytest: http://pytest.org
 .. _doctest: https://docs.python.org/3/library/doctest.html
@@ -30,4 +30,4 @@ Consider statement *Function foo takes 3 as an argument and returns 5*. From thi
 
 By analyzing what is being mocked by particular test we can also deduce if the object being tested is a pure function or a procedure. In other words by analyzing test's mocks you can find tested procedure's dependencies.
 
-**Tests are a description of code very much like type system is.** Tests describe an interface to function, function domain(reasonable arguments that was predicted by author and tested against) and dependencies. While using plain Python tests these data is basically unavailable. Due to these properties of declarative tests it is preferred to call it specification which function is tested against rather than actual tests.
+**Tests are a description of code very much like type system is.** Tests describe an interface to function, function domain(reasonable arguments that was predicted by author and tested against) and dependencies. While using plain Python tests this data is basically unavailable. Due to these properties of declarative tests it is preferred to call it specification which function is tested against rather than tests.

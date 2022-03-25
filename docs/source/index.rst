@@ -28,7 +28,8 @@ Install
    usage/documentation
    usage/mocks
    usage/result_validation
-   
+   usage/oop_features.rst
+
 Indices and tables
 ==================
 

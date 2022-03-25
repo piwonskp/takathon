@@ -32,6 +32,13 @@ Test cases can include plain values or sets of values as arguments. That is why 
 .. warning::
    Interval is mechanism of specyfing tests declaratively. Under the hood argument contained within specified range is randomly generated. The language **does not** prove the statement is true for all possible combinations of arguments by any means.
 
+Nominal data
+============
+
+For unordered test data you can use `any_of` to indicate that the result is constant for specified objects. 
+
+.. literalinclude:: ../../../examples/domain_types/nominal.py
+
 Running tests
 =============
 
@@ -47,14 +54,7 @@ Additionaly if you want more detailed output you can use:
 
    takathon -v info <path-to-file-or-directory>
 
-Nominal data
-============
-
-For unordered test data you can use `any_of` to indicate that the result is constant for specified objects. 
-
-.. literalinclude:: ../../../examples/domain_types/nominal.py
-
 Python features
 ===============
 
-Plain Python imports works out of the box so you can bring anything to test scope. No need to bloat the module itself. Python style comments are also supported.
+Plain Python imports works out of the box within the specification so you can bring any Python object into the test scope. No need to bloat the module itself. Python style comments are also supported.
