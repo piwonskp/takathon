@@ -12,7 +12,7 @@ If function is expected to raise an exception for particular input you can use `
 
 Between
 =======
-If your function returns inacurrate results you can use `between` to validate if result is in desired range. 
+If your function returns inaccurate results you can use `between` to validate if result is in desired range. 
 
 .. literalinclude:: ../../../examples/result_validation/inaccurate_result.py
 
